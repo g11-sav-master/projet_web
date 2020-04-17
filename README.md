@@ -2,4 +2,4 @@
 
 Ce dépot est destinée à l'élaboration de l'application web pour l'association CKC St Victorien. 
 
-L'ojevtif de cette application web est d'offrir une plateforme permettant de s'inscrire au raid intitulé "Le Bol d'Air".
+L'objectif de cette application web est d'offrir une plateforme permettant de s'inscrire au raid intitulé "Le Bol d'Air".
