@@ -1,17 +1,18 @@
 <div class="container">
     <form method="post" action="inscription">
-        <div class="form-group ">
-            <div class="row">
-                <div class="col-sm">
-                <select class="form-control form-control-sm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label></label>
+                    <select class="form-control">
                     <option>Bol d'air</option>
                     <option>Mini Bol d'air</option>
                     <option>Bol d'eau</option>
                     <option>Mini Bol d'eau</option>
                 </select>
                 </div>
-                <div class="col-sm">
-                    <select class="form-control form-control-sm">
+                <div class="form-group col-md-6">
+                    <label></label>
+                    <select class="form-control ">
                         <option> homme </option>
                         <option> femme </option>
                         <option> mixte </option>
@@ -19,7 +20,7 @@
                         </select>
                 </div>
             </div>
-        </div>
+        <hr noshade>
         <div class="form-group">
                 <label> Capitaine </label>
         </div>
@@ -30,9 +31,13 @@
             <div class="form-group col-md-3">
                 <input type="text" class="form-control" id="prenomC" name="prenomC" placeholder="Prénom">
             </div>
-                <label style="font-size: small">date de naissance</label>
-            <div class="form-group col-md-4">
-                <input type="date" class="form-control" id="dateC" name="dateC" placeholder="date">
+            <div class="input-group col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">date de naissance</span>
+                    </div>
+                    <input type="date" class="form-control" id="dateC" name="dateC">
+                </div>
             </div>
         </div>
         <div class="form-row">
@@ -43,12 +48,11 @@
                         <input type="tel" class="form-control" id="telC" name="telC" placeholder="téléphone">
                     </div>
                 </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label> Certificat medical :</label>
-                <input type="file" class="form-control-file" id="certifmedC" name="certifmedC">
+            <div class="custom-file col-md-6">
+                <label class="custom-file-label"> Certificat medical :</label>
+                <input type="file" class="custom-file-input" id="certifmedP" name="certifmedP">
             </div>
-        </div>
+        <hr noshade>
         <div class="form-group">
             <label> Equipier </label>
         </div>
@@ -59,9 +63,13 @@
             <div class="form-group col-md-3">
                 <input type="text" class="form-control" id="prenomP" name="prenomP" placeholder="Prénom">
             </div>
-            <label style="font-size: small">date de naissance</label>
-            <div class="form-group col-md-4">
-                <input type="date" class="form-control" id="dateP" name="dateP" placeholder="date">
+            <div class="input-group col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">date de naissance</span>
+                    </div>
+                    <input type="date" class="form-control" id="dateC" name="dateC">
+                </div>
             </div>
         </div>
         <div class="form-row">
@@ -72,20 +80,27 @@
                 <input type="tel" class="form-control" id="telP" name="telP" placeholder="téléphone">
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label> Certificat medical :</label>
-                <input type="file" class="form-control-file" id="certifmedP" name="certifmedP">
+            <div class="custom-file col-md-6">
+                <label class="custom-file-label"> Certificat medical :</label>
+                <input type="file" class="custom-file-input" id="certifmedP" name="certifmedP">
             </div>
+        <hr noshade>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">repas supplémentaires :</span>
+                    </div>
+                    <input type="number" class="form-control" id="nbrepas" name="nbrepas">
+                </div>
+            </div>
+                <div class="form-group col-md-4">
+                    <small id="repasHelp" class="form-text text-muted">prix unitaire: 7 €</small>
+                    <input class="btn btn-primary offset-md-8" type="submit" name="submit" id="submit" value="envoyer inscription">
+                </div>
         </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label> Repas supplémentaires:</label>
-                <input type="number" name="repas" id="repas">
-            </div>
-            <div class="form-group">
-                <label>prix unitaire: 7 €</label>
-            </div>
+        <div class="form-row ">
+
         </div>
     </form>
 </div>

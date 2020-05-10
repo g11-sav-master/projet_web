@@ -9,13 +9,23 @@ session_start();
     <body>
     <header>
         <div class="container">
-            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <h1 class="text-center" style=" color: #37adff; font-family: 'Bebas Neue';">Raid Bol d'Air</h1>
+            <ul class="nav justify-content-center" style=" background-color: #37adff; font-family: 'Bebas Neue';">
+                    <li class="nav-item">
+                        <a  class="nav-link" style=" color: white; font-family: 'Bebas Neue';" href="index.php?action=inscription">inscription</a>
+                    </li>
+                <li class="nav-item">
+                    <a  class="nav-link" style=" color: white; font-family: 'Bebas Neue';" href="index.php">connexion</a>
+                </li>
                 <?php
                 if (isset($_SESSION["login"])){
                     echo '<span class="btn btn-secondary session"><a href="index.php?action=logout" style="color: white;">déconnexion</a> </span>';
                 }
+                if (isset($_GET["action"]) && $_GET["action"]=="inscription"){
+                    echo '';
+                }
                 ?>
-                Site Bol d'Air</nav>
+            </ul>
         </div>
     </header>
     <?php
@@ -42,7 +52,10 @@ session_start();
 
     ?>
     <footer>
-        <div class="container" style="background-color: #e3f2fd;"> Bol d'air - 2020 3iL - SAV MASTER</div>
+        <div class="container" style="background-color: #37adff; color: white; font-family: 'sansation'">
+            <p class="text-center">
+                Bol d'air - 2020 3iL - SAV MASTER
+            </p> </div>
     </footer>
     </body>
 </html>
