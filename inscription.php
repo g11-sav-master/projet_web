@@ -1,7 +1,8 @@
 <?php
 $db = pg_connect("host=localhost dbname=postgres user=projet password=projet  ")
 or die('Connexion impossible : ' . pg_last_error());
-function generateRandomString($length = 10) {
+function generateRandomString($length = 10)
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
@@ -10,32 +11,37 @@ function generateRandomString($length = 10) {
     }
     return $randomString;
 }
-$logC= generateRandomString();
-$passC= generateRandomString();
+
+$logC = $_POST["mailC"];
+$passC = generateRandomString();
+$logE = $_POST["mailE"];
+$passE = generateRandomString();
+
 //création des utilisateurs
-    $query = "INSERT INTO projet.utilisateur (nom,prenom,e_mail,num_tel,date_naissance,login,mot_passe) 
-            VALUES ('".$_POST["nomC"]."','".$_POST["prenomC"]."','".$_POST["mailC"]."','".$_POST["telC"]."','".$_POST["dateC"]."','".$logC."','".$passC."'),
-            ('".$_POST["nomE"]."','".$_POST["prenomE"]."','".$_POST["mailE"]."','".$_POST["telE"]."','".$_POST["dateE"]."','".$logE."','".$passE."') ;
-            /* réccupération des ids utilisateurs */
-            SELECT id_utilisateur FROM projet.utilisateur WHERE (nom=".$_POST["nomC"]." AND prenom=".$_POST["prenomC"].") OR (nom=".$_POST["nomE"]." and prenom=".$_POST["prenomE"].");";
-    $resp = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
-    $ids = pg_fetch_all($resp, PGSQL_NUM);
-    $cap=$ids[0]; //id capitaine
-    $eqi=$ids[1]; //id équipier
-    //création des participants
-    $query2 = "INSERT INTO projet.participant (id_utilisateur) VALUES (".$ids[0]."),(".$ids[1].");";
-    $resp2 = pg_query($query2);
-    //création de la participation
-    $query3="INSERT INTO projet.participant_duo (id_categorie,id_raid,nbr_repas,paiement_valide) VALUES (0,0,2,false); 
-                SELECT * FROM projet.participant_duo id_part_duo ORDER BY id_part_duo DESC;";
-    $part=pg_query($query3);
-    $part=pg_fetch_array($part);
-    //ajout des membres de l'équipe
-    $query4="INSERT INTO projet.forme_duo VALUES (".$part[0].",".$ids[0].",".TRUE."),(".$part[0].",".$ids[1].",".FALSE.");";
-    $resp4 = pg_query($query4) or die('Échec de la requête : ' . pg_last_error());
-
-
-
-    /**
-INSERT INTO projet.participant VALUES (2,NULL),(1,NULL);
-            SELECT * FROM public.utilisateur,public.participant WHERE utilisateur.id_utilisateur = participant.id_utilisateur; **/
+$query = "INSERT INTO projet.utilisateur (nom,prenom,e_mail,num_tel,date_naissance,login,mot_passe) 
+            VALUES ('" . $_POST["nomC"] . "','" . $_POST["prenomC"] . "','" . $_POST["mailC"] . "','" . $_POST["telC"] . "','" . $_POST["dateC"] . "','" . $logC . "','" . $passC . "'),
+            ('" . $_POST["nomE"] . "','" . $_POST["prenomE"] . "','" . $_POST["mailE"] . "','" . $_POST["telE"] . "','" . $_POST["dateE"] . "','" . $logE . "','" . $passE . "') ;
+            SELECT id_utilisateur FROM projet.utilisateur WHERE (nom='" . $_POST["nomC"] . "' AND prenom='" . $_POST["prenomC"] . "') OR (nom='" . $_POST["nomE"] . "' and prenom='" . $_POST["prenomE"] . "') 
+            ORDER BY id_utilisateur DESC;";
+$resp = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
+$ids = pg_fetch_all($resp);
+$cap =  (int)($ids[0]['id_utilisateur']); //id capitaine
+$eqi = (int)($ids[1]['id_utilisateur']); //id équipier
+//création des participants
+$query2 = "INSERT INTO projet.participant (id_utilisateur) VALUES (" .$cap . "),(" . $eqi . ");";
+$resp = pg_query($query2) or die('Échec de la requête : ' . pg_last_error());
+//création de la participation
+$query3 = "INSERT INTO projet.participant_duo (id_categorie,id_raid,nbr_repas,paiement_valide) VALUES (".$_POST["categorie"].",".$_POST["raid"].",".$_POST["nbrepas"].",false); 
+                SELECT id_part_duo FROM projet.participant_duo ORDER BY id_part_duo DESC;";
+$part = pg_query($query3);
+$part = pg_fetch_array($part);
+//ajout des membres de l'équipe
+$query4 = "INSERT INTO projet.forme_duo VALUES (" . $part[0] . "," . $cap . ",TRUE),(" . $part[0] . "," . $eqi . ", FALSE);";
+$resp4 = pg_query($query4) or die('Échec de la requête : ' . pg_last_error());
+header("location:index.php");
+/** requêtes de réccupération des mots de passes:
+ *SELECT login, mot_passe, utilisateur.id_utilisateur,forme_duo.id_utilisateur,forme_duo.id_part_duo,participant_duo.id_part_duo
+FROM projet.utilisateur
+INNER JOIN projet.forme_duo ON utilisateur.id_utilisateur=forme_duo.id_utilisateur
+INNER JOIN projet.participant_duo ON forme_duo.id_part_duo=participant_duo.id_part_duo;
+ */
