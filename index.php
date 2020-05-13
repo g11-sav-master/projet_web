@@ -18,7 +18,7 @@ session_start();
                     <a  class="nav-link" style=" color: white; font-family: 'Bebas Neue';" href="index.php">connexion</a>
                 </li>
                 <?php
-                if (isset($_SESSION["login"])){
+                if (isset($_SESSION["login"])) {
                     echo '<span class="btn btn-secondary session"><a href="index.php?action=logout" style="color: white;">déconnexion</a> </span>';
                 }
                 if (isset($_GET["action"]) && $_GET["action"]=="inscription"){
@@ -31,7 +31,7 @@ session_start();
     <?php
     if (isset($_SESSION["login"]) && $_GET["action"]=="profil")
     {
-        echo $_SESSION["login"];
+        include "profil.php";
     }
     if (isset($_GET["action"]) && $_GET["action"]=="inscription")
     {
@@ -44,10 +44,6 @@ session_start();
     }
     if (!(isset($_SESSION["login"])) && !(isset($_GET["action"]))){
         include ('connexion_form.html');
-    }
-    if (isset($_SESSION["login"]) && $_GET["action"]=="profil")
-    {
-        echo $_SESSION["login"];
     }
 
     ?>
