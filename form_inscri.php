@@ -4,17 +4,35 @@
                 <div class="form-group col-md-6">
                     <label></label>
                     <select class="form-control" name="raid">
-                    <option value="1">Bol d'air</option>
-                    <option value="2">Mini Bol d'air</option>
+                        <?php
+                        $db = pg_connect("host=localhost dbname=postgres user=projet password=projet  ")
+                        or die('Connexion impossible : ' . pg_last_error());
+                        $query = "SELECT nom_raid,id_raid FROM raid;";
+                        $resp = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
+                        $resp = pg_fetch_all($resp);
+                        foreach ($resp as $raid)
+                        {
+                            echo '<option value="'.$raid["id_raid"].'">'.$raid["nom_raid"].'</option>';
+                        }
+                        ?>
+                    <!--<option value="1">Bol d'air</option>
+                    <option value="2">Mini Bol d'air</option> -->
                 </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label></label>
                     <select class="form-control " name="categorie">
-                        <option value="1"> homme </option>
-                        <option value="2"> femme </option>
-                        <option value="3"> mixte </option>
-                        <option value="4"> V.A.E. </option>
+                        <?php
+                        /* $db = pg_connect("host=localhost dbname=postgres user=projet password=projet  ")
+                         or die('Connexion impossible : ' . pg_last_error());*/
+                        $query = "SELECT id_categorie,nom_categorie FROM categorie_raid;";
+                        $resp = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
+                        $resp = pg_fetch_all($resp);
+                        foreach ($resp as $categorie)
+                        {
+                            echo '<option value="'.$categorie["id_categorie"].'">'.$categorie["nom_categorie"].'</option>';
+                        }
+                        ?>
                         </select>
                 </div>
             </div>
@@ -98,7 +116,6 @@
                 </div>
         </div>
         <div class="form-row ">
-
         </div>
     </form>
 </div>

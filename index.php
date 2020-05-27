@@ -35,7 +35,7 @@ session_start();
     }
     if (isset($_GET["action"]) && $_GET["action"]=="inscription")
     {
-        include ('form_inscri.php.html');
+        include('form_inscri.php');
     }
     if (isset($_GET["action"]) && $_GET["action"]=="logout"){
         session_destroy();
