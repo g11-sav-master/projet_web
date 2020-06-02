@@ -13,7 +13,7 @@ WHERE participant.id_utilisateur =".$_SESSION["idPart"].";";
 $resp=pg_query($query2);
 $resp=pg_fetch_all($resp);
 ?>
-<div class="content">
+<div class="container">
     <table class="table">
         <tr>
             <th>participant</th>

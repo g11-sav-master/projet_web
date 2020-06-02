@@ -29,9 +29,14 @@ session_start();
         </div>
     </header>
     <?php
+    if ((!(isset($_SESSION["login"])) && !(isset($_GET["action"]))) || !(isset($_GET["action"]))){
+
+        include ('connexion_form.html');
+    }
+
     if (isset($_SESSION["login"]) && $_GET["action"]=="profil")
     {
-        include "profil.php";
+        include ("profil.php");
     }
     if (isset($_GET["action"]) && $_GET["action"]=="inscription")
     {
@@ -41,9 +46,6 @@ session_start();
         session_destroy();
         header("location:index.php");
         exit();
-    }
-    if (!(isset($_SESSION["login"])) && !(isset($_GET["action"]))){
-        include ('connexion_form.html');
     }
 
     ?>

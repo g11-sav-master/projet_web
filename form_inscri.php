@@ -14,6 +14,7 @@
                         {
                             echo '<option value="'.$raid["id_raid"].'">'.$raid["nom_raid"].'</option>';
                         }
+                        //$_POST['raid']=$resp[0]['id_raid'];
                         ?>
                     <!--<option value="1">Bol d'air</option>
                     <option value="2">Mini Bol d'air</option> -->
@@ -32,6 +33,7 @@
                         {
                             echo '<option value="'.$categorie["id_categorie"].'">'.$categorie["nom_categorie"].'</option>';
                         }
+                        //$_POST["categorie"]=$resp[0]["id_categorie"];
                         ?>
                         </select>
                 </div>
@@ -107,7 +109,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">repas supplémentaires :</span>
                     </div>
-                    <input type="number" class="form-control" id="nbrepas" name="nbrepas">
+                    <input type="number" class="form-control" id="nbrepas" name="nbrepas" value="0">
                 </div>
             </div>
                 <div class="form-group col-md-4">
