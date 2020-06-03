@@ -37,6 +37,10 @@ if (isset($_POST["nomE"]) && isset($_POST["nomC"])) {
                 SELECT id_part_duo FROM projet.participant_duo ORDER BY id_part_duo DESC;";
     $part = pg_query($query3);
     $part = pg_fetch_array($part);
+    $queryV = "INSERT INTO projet.validation_medicale (id_utilisateur,est_valide,date_expiration) 
+                VALUES (".$cap.",false,".date("'Y-m-d'")." ),(".$eqi.',false,'.date("'Y-m-d'").')';
+   // print_r($queryV);
+    $valid = pg_query($queryV);
 //ajout des membres de l'équipe
     $query4 = "INSERT INTO projet.forme_duo VALUES (" . $part[0] . "," . $cap . ",TRUE),(" . $part[0] . "," . $eqi . ", FALSE);";
     $resp4 = pg_query($query4) or die('Échec de la requête : ' . pg_last_error());
